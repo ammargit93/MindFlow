@@ -18,9 +18,5 @@ routes:
       - "don't you just love the president"
       - "they're going to destroy this country!"
       - "they will save the country!"
-    action: llm:google/gemma-3-270m
+    action: llm:Qwen3-Next-80B-A3B-Instruct
 
-  - name: data_query
-    utterances:
-      - "get sales report"
-    action: tool:sql_agent
