@@ -6,6 +6,7 @@ class BaseIndex:
     def __init__(self, collection_name):
         client = chromadb.Client()
         self.collection = client.create_collection(collection_name)
+
     
     
 class ChromaIndex(BaseIndex):
@@ -23,6 +24,7 @@ class ChromaIndex(BaseIndex):
             metadatas=metadata,            
             ids=ids
         )
+        
     
     def query_document(self, query):
         embedding = FastEmbedEmbeddings()

@@ -1,7 +1,6 @@
 routes:
   - name: chitchat
     utterances:
-      - "how's the weather"
       - "what's up"
       - "how's the weather today?"
       - "how are things going?"
@@ -9,6 +8,7 @@ routes:
       - "the weather is horrendous"
       - "let's go to the chippy"
     action: llm:llama-3.3-70b-versatile
+
 
   - name: politics
     utterances:

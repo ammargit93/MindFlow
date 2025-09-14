@@ -4,7 +4,7 @@ import uuid
 
 cfg = load_config()['routes']
 
-all_indices = []
+indices = []
 
 
 for config in cfg:
@@ -14,11 +14,11 @@ for config in cfg:
     
     chroma_index = ChromaIndex(collection_name=collection_name)
     chroma_index.add_document(documents=document, ids=[str(uuid.uuid1()) for _ in document])
-    all_indices.append(chroma_index)
+    indices.append(chroma_index)
 
-query = "How is the weather?"
-for index in all_indices:
-    
+query = "Whats the difference between coffee and president of the school club?"
+
+for index in indices:
     res = index.query_document(query)
     avg_dist = sum(res['distances'][0])/len(res['distances'][0])
-    print(f"{res['documents']} {avg_dist} {index.index_name}\n")
+    print(f"{avg_dist} {index.index_name}\n")
