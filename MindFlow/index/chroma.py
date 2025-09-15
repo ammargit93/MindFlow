@@ -9,8 +9,9 @@ class BaseIndex:
     
     
 class ChromaIndex(BaseIndex):
-    def __init__(self, collection_name):
+    def __init__(self, collection_name, llm):
         self.index_name = collection_name
+        self.llm = llm
         super().__init__(collection_name)
         
         
