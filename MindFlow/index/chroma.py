@@ -1,7 +1,6 @@
 import chromadb
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 
-
 class BaseIndex:
     def __init__(self, collection_name):
         client = chromadb.Client()
