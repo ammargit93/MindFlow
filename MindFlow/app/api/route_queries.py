@@ -12,7 +12,6 @@ load_dotenv(env_path)
 router = APIRouter()
 
 # API Inference client
- 
 class HFChatCompletionClient:
     def __init__(self, model_card, inference_provider, api_url):
         self.model_card = model_card
