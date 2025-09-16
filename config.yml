@@ -6,7 +6,9 @@ routes:
       - "how are things going?"
       - "let's go to the chippy"
       - "what's going on?"
-    action: llm:llama-3.3-70b-versatile
+    model_id: llm:llama-3.3-70b-versatile
+    inference_provider: hf-inference
+    api_url: 
 
   - name: politics
     utterances:
@@ -15,4 +17,6 @@ routes:
       - "why don't you tell me about your political opinions"
       - "don't you just love the president"
       - "they're going to destroy this country!"
-    action: llm:Qwen3-Next-80B-A3B-Instruct
+    model_id: llm:Qwen/Qwen3-Next-80B-A3B-Instruct
+    inference_provider: novita
+    api_url: https://router.huggingface.co/v1/chat/completions
