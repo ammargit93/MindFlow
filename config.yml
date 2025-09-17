@@ -1,5 +1,5 @@
 defaults:
-  vectordb: chroma
+  vectordb: faiss
   embeddings: fastembed
 
 
