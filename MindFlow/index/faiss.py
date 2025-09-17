@@ -5,7 +5,11 @@ from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_core.documents import Document
 
 import uuid
-
+# MAPPING:
+#
+# collection -> List[uuid]
+#
+# 
 index_map = {}
 
 class FAISSIndex:
@@ -22,14 +26,22 @@ class FAISSIndex:
         )
     
     def add_document(self, documents):
+        ids = [str(uuid.uuid1()) for _ in documents]
         document_collection = [Document(page_content=document) for document in documents] 
-        
-        self.vector_store.add_documents(documents=document_collection, ids=[uuid.uu])
+        index_map[self.index_name] = ids
+        self.vector_store.add_documents(documents=document_collection, ids=ids)
 
     def query_document(self, query):
         response = {}
         results = self.vector_store.similarity_search_with_score(query, k=1)
         print(results)
-        response['res'] = results[0].page_content
-        response['score'] = results[1]
+        
+        id = results[0][0].id
+        indexname = ""
+        for k, v in index_map.items():
+            if id in v:
+                indexname = k
+        
+        response['route'] = indexname
+        response['distances'] = [[results[0][1]]]
         return response

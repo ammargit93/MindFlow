@@ -29,6 +29,7 @@ class ChromaIndex(BaseIndex):
     def query_document(self, query):
         embedding = FastEmbedEmbeddings()
         embedded_query = embedding.embed_query(query)
+        print(self.collection.query(query_embeddings=embedded_query,query_texts=query))
         return self.collection.query(query_embeddings=embedded_query,query_texts=query)
     
     

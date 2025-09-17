@@ -49,7 +49,6 @@ def route_query(query: str):
             min_dist = avg_dist
             best_route = route
     
-    llm = best_route.index.llm
     chat_client = HFChatCompletionClient(best_route.index.llm, best_route.route.inference_provider,best_route.route.api_url)
     response = chat_client.invoke(query=query)
     return {"result":response, "llm":best_route.index.llm}
