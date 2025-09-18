@@ -26,13 +26,12 @@ class BaseIndex:
         self.collection = client.create_collection(collection_name)
 
     
-    
+
 class ChromaIndex(BaseIndex):
     def __init__(self, collection_name, llm):
         self.index_name = collection_name
         self.llm = llm
         super().__init__(collection_name)
-        
         
     def add_document(self, documents):
         ids = [str(uuid.uuid1()) for _ in documents]
