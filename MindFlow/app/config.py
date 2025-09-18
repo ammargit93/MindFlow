@@ -17,9 +17,9 @@ DEFAULT_CFG_MAPPER = {
 }
 
 class RouteIndex:
-    def __init__(self, Route, ChromaIndex):
+    def __init__(self, Route, Index):
         self.route = Route
-        self.index = ChromaIndex
+        self.index = Index
         
         
 for config in route_cfg:

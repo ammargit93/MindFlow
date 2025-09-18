@@ -3,14 +3,38 @@ from langchain_community.docstore.in_memory import InMemoryDocstore
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_core.documents import Document
-
 import uuid
+
+
 # MAPPING:
 #
 # collection -> List[uuid]
 #
 # 
+# response format: {
+#     llm: LLM that is called,
+#     distance: average distance.
+#     index: Vector index class that was called("chroma","faiss"),
+#     route: Route name (chitchat, politics etc)
+# }
+
+
 index_map = {}
+
+def faiss_response_parser(results, llm):
+    response = {}
+    id = results[0][0].id
+    indexname = ""
+    for k, v in index_map.items():
+        if id in v:
+            indexname = k
+    
+    response['llm'] = llm
+    response['distance'] = float(results[0][1])
+    response['index'] = "faiss"    
+    
+    return response
+
 
 class FAISSIndex:
     def __init__(self, collection_name, llm):
@@ -32,16 +56,6 @@ class FAISSIndex:
         self.vector_store.add_documents(documents=document_collection, ids=ids)
 
     def query_document(self, query):
-        response = {}
         results = self.vector_store.similarity_search_with_score(query, k=1)
-        print(results)
-        
-        id = results[0][0].id
-        indexname = ""
-        for k, v in index_map.items():
-            if id in v:
-                indexname = k
-        
-        response['route'] = indexname
-        response['distances'] = [[results[0][1]]]
+        response = faiss_response_parser(results=results,llm=self.llm)
         return response

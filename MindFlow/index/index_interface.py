@@ -6,3 +6,4 @@ class IndexInterface:
         self.vectordb = default_cfg['vectordb']
         
         
+    

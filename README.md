@@ -10,7 +10,7 @@ Instead of waiting for an LLM to decide, we use embeddings + vector search for f
 ## 🔑 Features
 - **Semantic Routing**: Classifies user queries based on embedding similarity.
 
-- **Vector Database**: Uses ChromaDB to store and query route embeddings.
+- **Pluggable Vector Database**: Supports pluggable vector databases (currently only supports chroma,faiss).
 
 - **Configurable via YAML**: Define routes, utterances, LLMs, and API providers in a simple YAML file.
 

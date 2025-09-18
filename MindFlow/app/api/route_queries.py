@@ -19,6 +19,7 @@ class HFChatCompletionClient:
         self.api_url = api_url
         self.client = InferenceClient(provider=self.inference_provider, api_key=os.getenv('HF_TOKEN'))
 
+        
 
     def invoke(self, query):
         completion = self.client.chat.completions.create(
@@ -39,17 +40,18 @@ class HFChatCompletionClient:
 def route_query(query: str):
     best_route = None
     min_dist = math.inf
-     
+    best_response = None
     for route in routes:
         index = route.index
         res = index.query_document(query) 
-        avg_dist = sum(res['distances'][0]) / len(res['distances'][0])
-        
+        avg_dist = res['distance']
+        # print(res)
         if avg_dist < min_dist:
             min_dist = avg_dist
             best_route = route
+            best_response = res
     
     chat_client = HFChatCompletionClient(best_route.index.llm, best_route.route.inference_provider,best_route.route.api_url)
     response = chat_client.invoke(query=query)
-    return {"result":response, "llm":best_route.index.llm}
+    return {"response":response, "distance":min_dist, "route":best_route.index.index_name, "index":best_response['index'],"llm":best_response['llm']}
         
