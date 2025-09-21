@@ -1,6 +1,5 @@
 defaults:
   vectordb: chroma
-  embeddings: fastembed
 
 
 routes:
@@ -11,8 +10,6 @@ routes:
       - "how are things going?"
       - "let's go to the chippy"
       - "what's going on?"
-    model_id: llm:meta-llama/Llama-3.1-8B-Instruct
-    inference_provider: cerebras
     api_url: https://router.huggingface.co/v1/chat/completions
 
   - name: politics
@@ -22,6 +19,4 @@ routes:
       - "why don't you tell me about your political opinions"
       - "don't you just love the president"
       - "they're going to destroy this country!"
-    model_id: llm:Qwen/Qwen3-Next-80B-A3B-Instruct
-    inference_provider: novita
     api_url: https://router.huggingface.co/v1/chat/completions

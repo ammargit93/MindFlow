@@ -4,17 +4,10 @@ import uuid
 
 
 
-# response format: {
-#     llm: LLM that is called,
-#     distance: average distance.
-#     index: Vector index class that was called,
-#     route: Route name (chitchat, politics etc)
-# }
 
 
-def chroma_response_parser(result, llm):
+def chroma_response_parser(result):
     response = {}
-    response['llm'] = llm
     response['distance'] = sum(result['distances'][0])/len(result['distances'][0])
     response['index'] = "chroma"
     
@@ -30,9 +23,8 @@ class BaseIndex:
     
 
 class ChromaIndex(BaseIndex):
-    def __init__(self, collection_name, llm):
+    def __init__(self, collection_name):
         self.index_name = collection_name
-        self.llm = llm
         super().__init__(collection_name)
         
     def add_document(self, documents):
@@ -53,10 +45,6 @@ class ChromaIndex(BaseIndex):
         embedded_query = embedding.embed_query(query)
         result = self.collection.query(query_embeddings=embedded_query,query_texts=query)
         print(result)
-        response = chroma_response_parser(result=result, llm=self.llm)
+        response = chroma_response_parser(result=result)
         return response
 
-    
-    
-    def clear_index(self):
-        self.collection.delete()

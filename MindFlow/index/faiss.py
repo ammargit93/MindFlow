@@ -11,17 +11,11 @@ import uuid
 # collection -> List[uuid]
 #
 # 
-# response format: {
-#     llm: LLM that is called,
-#     distance: average distance.
-#     index: Vector index class that was called("chroma","faiss"),
-#     route: Route name (chitchat, politics etc)
-# }
 
 
 index_map = {}
 
-def faiss_response_parser(results, llm):
+def faiss_response_parser(results):
     response = {}
     id = results[0][0].id
     indexname = ""
@@ -29,7 +23,6 @@ def faiss_response_parser(results, llm):
         if id in v:
             indexname = k
     
-    response['llm'] = llm
     response['distance'] = float(results[0][1])
     response['index'] = "faiss"    
     
@@ -39,7 +32,6 @@ def faiss_response_parser(results, llm):
 class FAISSIndex:
     def __init__(self, collection_name, llm):
         self.index_name = collection_name
-        self.llm = llm
         self.embeddings = FastEmbedEmbeddings()
         self.index = faiss.IndexFlatL2(len(self.embeddings.embed_query("test")))
         self.vector_store = FAISS(
@@ -57,5 +49,5 @@ class FAISSIndex:
 
     def query_document(self, query):
         results = self.vector_store.similarity_search_with_score(query, k=1)
-        response = faiss_response_parser(results=results,llm=self.llm)
+        response = faiss_response_parser(results=results)
         return response

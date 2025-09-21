@@ -26,13 +26,11 @@ class RouteIndex:
 for config in route_cfg:
     collection_name = config['name']
     document = config['utterances']
-    llm = config['model_id'].split(":")[-1]
-    inference_provider = config['inference_provider']
     api_url = config['api_url']
     
-    route = Route(route_name=collection_name, model_card=llm, inference_provider=inference_provider, api_url=api_url)
+    route = Route(route_name=collection_name, api_url=api_url)
     
-    general_index = DEFAULT_CFG_MAPPER[default_cfg["vectordb"]](collection_name=collection_name, llm=llm)
+    general_index = DEFAULT_CFG_MAPPER[default_cfg["vectordb"]](collection_name=collection_name)
     
     route_index = RouteIndex(route, general_index)
     
