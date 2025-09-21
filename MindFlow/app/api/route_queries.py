@@ -1,9 +1,8 @@
 from fastapi import APIRouter
 from app.config import routes
-import math
 from dotenv import load_dotenv, find_dotenv
-import os
-from interface import HFChatCompletionClient
+from app.interface import HFChatCompletionClient
+import math
 
 
 env_path = find_dotenv()
@@ -19,10 +18,8 @@ def route_query(query: str):
     min_dist = math.inf
     best_response = None
     for route in routes:
-        index = route.index
-        res = index.query_document(query) 
+        res = route.index.query_document(query) 
         avg_dist = res['distance']
-        # print(res)
         if avg_dist < min_dist:
             min_dist = avg_dist
             best_route = route
@@ -32,3 +29,4 @@ def route_query(query: str):
     response = chat_client.invoke(query=query)
     return {"response":response, "distance":min_dist, "route":best_route.index.index_name, "index":best_response['index'],"llm":best_response['llm']}
         
+

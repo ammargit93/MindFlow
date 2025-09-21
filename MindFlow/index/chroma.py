@@ -20,6 +20,8 @@ def chroma_response_parser(result, llm):
     
     return response
     
+    
+    
 class BaseIndex:
     def __init__(self, collection_name):
         client = chromadb.Client()
@@ -35,13 +37,12 @@ class ChromaIndex(BaseIndex):
         
     def add_document(self, documents):
         ids = [str(uuid.uuid1()) for _ in documents]
-        metadata = None
         embeddings = FastEmbedEmbeddings()
         document_embeddings = embeddings.embed_documents(documents)
         self.collection.add(
             documents=documents,
             embeddings=document_embeddings,
-            metadatas=metadata,            
+            metadatas=None,            
             ids=ids
         )
         
