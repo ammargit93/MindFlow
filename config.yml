@@ -1,22 +1,35 @@
-defaults:
-  vectordb: chroma
-
-
 routes:
-  - name: chitchat
-    utterances:
-      - "what's up"
-      - "how's the weather today?"
-      - "how are things going?"
-      - "let's go to the chippy"
-      - "what's going on?"
-    api_url: https://router.huggingface.co/v1/chat/completions
+  analytics-service:
+    url: https://internal.company.com/analytics
+    type: rule
+    trigger_field: action
+    methods: ["POST"]
+    required_fields: ["action", "month"]
 
-  - name: politics
-    utterances:
-      - "tell me about the president"
-      - "isn't politics the best thing ever"
-      - "why don't you tell me about your political opinions"
-      - "don't you just love the president"
-      - "they're going to destroy this country!"
-    api_url: https://router.huggingface.co/v1/chat/completions
+  user-service:
+    url: https://internal.company.com/users
+    type: rule
+    trigger_field: user_id
+    methods: ["GET", "PUT"]
+    required_fields: ["user_id", "email"]
+
+  billing-service:
+    url: https://internal.company.com/billing
+    type: rule
+    trigger_field: invoice_id
+    methods: ["POST", "GET"]
+    required_fields: ["invoice_id", "amount", "currency"]
+
+  notification-service:
+    url: https://internal.company.com/notifications
+    type: rule
+    trigger_field: notification_type
+    methods: ["POST"]
+    required_fields: ["notification_type", "message", "recipient_id"]
+
+  reporting-service:
+    url: https://internal.company.com/reports
+    type: rule
+    trigger_field: report_type
+    methods: ["GET"]
+    required_fields: ["report_type", "start_date", "end_date"]

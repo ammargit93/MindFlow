@@ -6,4 +6,4 @@ cfg = load_config()['routes']
 
 app = FastAPI(title="A semantic router")
 
-app.include_router(router=router, prefix="/mindflow/api")
+app.include_router(router=router, prefix="/mindflow/router")

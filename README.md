@@ -1,21 +1,21 @@
 # MindFlow 🚀
 
-A minimal semantic router powered by embeddings & ChromaDB
+A minimal config-driven semantic router for network requests and API services.
 
 ## 📌 Overview
 
-MindFlow is an experimental project that routes user queries to the right action or model by comparing semantic similarity.
-Instead of waiting for an LLM to decide, we use embeddings + vector search for fast routing.
+MindFlow routes incoming requests to the appropriate service based on semantic similarity or rule-based triggers.
+It allows businesses to define routing logic entirely via configuration.
+
+Instead of coupling the router to specific backends, MindFlow acts as a generic gateway, forwarding requests to any service
 
 ## 🔑 Features
-- **Semantic Routing**: Classifies user queries based on embedding similarity.
+- **Config-Driven Routing**: Define routes, trigger fields, and backend endpoints in a simple YAML file.
 
-- **Pluggable Vector Database**: Supports pluggable vector databases (currently only supports chroma,faiss).
+- **Rule based Routing**: Supports both structured-field-based rules and semantic similarity matching.
 
-- **Configurable via YAML**: Define routes, utterances, LLMs, and API providers in a simple YAML file.
+- **Transparent Request Forwarding**: Router can forward requests as-is to the target service (HTTP methods, headers, query params, body).
 
-- **Pluggable LLMs**: Supports multiple backends (Hugging Face Inference API, OpenAI, local models).
+- **Multi-Service Support**: Works with any REST/gRPC/HTTP backend; services can be added or modified by updating configuration.
 
-- **Automatic Embeddings**: Generates embeddings for utterances automatically using FastEmbed.
-
-Inspired by [semantic-router](https://github.com/aurelio-labs/semantic-router)
+- **Extensible**: Can later be extended for embeddings, AI models, or other multi-modal routing.
