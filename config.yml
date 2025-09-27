@@ -1,6 +1,6 @@
 routes:
   analytics-service:
-    url: https://internal.company.com/analytics
+    url: https://jsonplaceholder.typicode.com/posts
     type: rule
     trigger_field: action
     methods: ["POST"]
