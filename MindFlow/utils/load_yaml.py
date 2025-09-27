@@ -1,3 +1,5 @@
+from typing import List
+import random
 import yaml
 import os
 
@@ -11,3 +13,4 @@ def load_config(config_path: str = None):
 
     return config
 
+    

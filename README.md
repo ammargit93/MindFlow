@@ -1,10 +1,10 @@
 # MindFlow 🚀
 
-A minimal config-driven semantic router for network requests and API services.
+A minimal config-driven router for network requests and API services.
 
 ## 📌 Overview
 
-MindFlow routes incoming requests to the appropriate service based on semantic similarity or rule-based triggers.
+MindFlow routes incoming requests to the appropriate service based on rule-based triggers.
 It allows businesses to define routing logic entirely via configuration.
 
 Instead of coupling the router to specific backends, MindFlow acts as a generic gateway, forwarding requests to any service

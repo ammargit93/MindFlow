@@ -1,34 +1,39 @@
 routes:
   analytics-service:
-    url: https://jsonplaceholder.typicode.com/posts
+    url: 
+      - https://jsonplaceholder.typicode.com/posts
     type: rule
     trigger_field: action
     methods: ["POST"]
     required_fields: ["action", "month"]
 
   user-service:
-    url: https://internal.company.com/users
+    url: 
+      - https://jsonplaceholder.typicode.com/users
     type: rule
     trigger_field: user_id
     methods: ["GET", "PUT"]
     required_fields: ["user_id", "email"]
 
   billing-service:
-    url: https://internal.company.com/billing
+    url: 
+      - https://jsonplaceholder.typicode.com/posts
     type: rule
     trigger_field: invoice_id
     methods: ["POST", "GET"]
     required_fields: ["invoice_id", "amount", "currency"]
 
   notification-service:
-    url: https://internal.company.com/notifications
+    url: 
+      - https://jsonplaceholder.typicode.com/posts
     type: rule
     trigger_field: notification_type
     methods: ["POST"]
     required_fields: ["notification_type", "message", "recipient_id"]
 
   reporting-service:
-    url: https://internal.company.com/reports
+    url: 
+      - https://jsonplaceholder.typicode.com/posts
     type: rule
     trigger_field: report_type
     methods: ["GET"]
