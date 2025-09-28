@@ -2,39 +2,42 @@ routes:
   analytics-service:
     url: 
       - https://jsonplaceholder.typicode.com/posts
+      - http://localhost:8001
+      - http://localhost:8002
+      # - http://localhost:8003
     type: rule
     trigger_field: action
     methods: ["POST"]
     required_fields: ["action", "month"]
 
-  user-service:
-    url: 
-      - https://jsonplaceholder.typicode.com/users
-    type: rule
-    trigger_field: user_id
-    methods: ["GET", "PUT"]
-    required_fields: ["user_id", "email"]
+  # user-service:
+  #   url: 
+  #     - https://jsonplaceholder.typicode.com/users
+  #   type: rule
+  #   trigger_field: user_id
+  #   methods: ["GET", "PUT"]
+  #   required_fields: ["user_id", "email"]
 
-  billing-service:
-    url: 
-      - https://jsonplaceholder.typicode.com/posts
-    type: rule
-    trigger_field: invoice_id
-    methods: ["POST", "GET"]
-    required_fields: ["invoice_id", "amount", "currency"]
+  # billing-service:
+  #   url: 
+  #     - https://jsonplaceholder.typicode.com/posts
+  #   type: rule
+  #   trigger_field: invoice_id
+  #   methods: ["POST", "GET"]
+  #   required_fields: ["invoice_id", "amount", "currency"]
 
-  notification-service:
-    url: 
-      - https://jsonplaceholder.typicode.com/posts
-    type: rule
-    trigger_field: notification_type
-    methods: ["POST"]
-    required_fields: ["notification_type", "message", "recipient_id"]
+  # notification-service:
+  #   url: 
+  #     - https://jsonplaceholder.typicode.com/posts
+  #   type: rule
+  #   trigger_field: notification_type
+  #   methods: ["POST"]
+  #   required_fields: ["notification_type", "message", "recipient_id"]
 
-  reporting-service:
-    url: 
-      - https://jsonplaceholder.typicode.com/posts
-    type: rule
-    trigger_field: report_type
-    methods: ["GET"]
-    required_fields: ["report_type", "start_date", "end_date"]
+  # reporting-service:
+  #   url: 
+  #     - https://jsonplaceholder.typicode.com/posts
+  #   type: rule
+  #   trigger_field: report_type
+  #   methods: ["GET"]
+  #   required_fields: ["report_type", "start_date", "end_date"]

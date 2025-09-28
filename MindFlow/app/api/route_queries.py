@@ -3,10 +3,11 @@ from fastapi import APIRouter, Request
 from app.config import routes
 from dotenv import load_dotenv, find_dotenv
 from utils.load_balance import random_balancer
+from collections import Counter
 import httpx
 import logging
 
-logging.basicConfig(level=logging.INFO, format='\n%(asctime)s - %(levelname)s - %(message)s\n')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 env_path = find_dotenv()
 load_dotenv(env_path)
@@ -36,7 +37,9 @@ async def route_query(request: Request):
 
         dispatch_url = random_balancer(route.urls)
         domain_count[dispatch_url] = domain_count.get(dispatch_url, 0) + 1
-        logging.info(f"Number of requests in {dispatch_url}: {domain_count[dispatch_url]}")
+        # print(domain_count)
+        for k,v in domain_count.items():
+            logging.info(f"{k}: {v}")
 
         if header_match or source_match:
             async with httpx.AsyncClient() as client:
@@ -48,9 +51,7 @@ async def route_query(request: Request):
                     content=body_bytes,
                 )
             
-            logging.info(f"INFO: response from {route.urls[0]}")
             route_count[route.route_name] = route_count.get(route.route_name, 0) + 1
-            logging.info(f"Number of requests in {route.route_name}: {route_count[route.route_name]}")
             
             return {
                 "matched_route": route.route_name,
@@ -59,5 +60,4 @@ async def route_query(request: Request):
             }
     
     logging.info(f"INFO: request did not match any route")
-    
     return {"error": "did not match any route"}

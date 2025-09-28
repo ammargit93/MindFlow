@@ -1,5 +1,3 @@
-from typing import List
-import random
 import yaml
 import os
 
