@@ -37,7 +37,6 @@ async def route_query(request: Request):
 
         dispatch_url = random_balancer(route.urls)
         domain_count[dispatch_url] = domain_count.get(dispatch_url, 0) + 1
-        # print(domain_count)
         for k,v in domain_count.items():
             logging.info(f"{k}: {v}")
 
